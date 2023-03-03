@@ -2,7 +2,7 @@ import React from 'react';
 
 interface IweatherData {
   name: string;
-  weather?: string;
+  weather: string;
   temp: number;
 }
 const WeatherDataList = ({ name, weather, temp }: IweatherData) => {

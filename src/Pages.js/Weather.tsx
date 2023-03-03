@@ -1,21 +1,65 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
-import { getWeather, WeatherCurrentDay } from '../Store/Slices/CurrentApi';
+import { useState } from 'react';
 import React from 'react';
-import HF from '../img/A.jpg';
-import WeatherCard from './WeaderCard';
+import MainImage from '../img/mainImage.jpg';
+import WeatherCard from './weatherCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../Store/Slices/Store';
-import { useAppSelect } from '../Store/Slices/Store';
-import { editCityName } from '../Store/Slices/CityName';
+import { editCityName } from '../Store/Slices/CityNameSlice';
 import { WeatherCurrentApi } from '../Store/thunk/CurrentThunk';
+
+const Weather = () => {
+  const weatherDataList = useSelector((state: RootState) => state.WeatherCurrentDay);
+  const dispatch = useDispatch<AppDispatch>();
+  const [text, setText] = useState('');
+
+  const changeName = (value: string) => {
+    dispatch(editCityName(value));
+  };
+
+  const weatherDataHandler = async (value: string) => {
+    try {
+      await dispatch(WeatherCurrentApi(value));
+    } catch {
+      console.log('err');
+    }
+  };
+
+  const ClickHandler = async (e: string) => {
+    changeName(e);
+    await weatherDataHandler(e);
+    setText('');
+  };
+
+  return (
+    <WeatherMainPage>
+      <SearchBarArea>
+        <h1>어느 나라의 날씨가 궁금하신가요?</h1>
+        <InputBarArea>
+          <InputBar value={text} type="text" onChange={(e) => setText(e.target.value)}></InputBar>
+          <SubmitBtn type="submit" onClick={() => ClickHandler(text)}>
+            Click
+          </SubmitBtn>
+        </InputBarArea>
+      </SearchBarArea>
+      <ResultWeatherList>
+        {weatherDataList &&
+          weatherDataList.result.map((el, index: number) => (
+            <WeatherCard key={index} temp={el.main.temp} weather={el.weather[0].main} name={el.name}></WeatherCard>
+          ))}
+      </ResultWeatherList>
+    </WeatherMainPage>
+  );
+};
+
+export default Weather;
 
 const WeatherMainPage = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: row;
-  background-image: url(${HF});
+  background-image: url(${MainImage});
   background-size: cover;
 `;
 
@@ -62,71 +106,3 @@ const ResultWeatherList = styled.div`
   width: 50%;
   overflow-y: scroll;
 `;
-const Weather = () => {
-  const countryList = useSelector((state: RootState) => state.ListSlice);
-  const AppData = useSelector((state: RootState) => state.WeatherCurrentDay);
-  const currentWeatherList = useAppSelect(getWeather);
-
-  const dispatch = useDispatch<AppDispatch>();
-  const [text, setText] = useState('');
-  const [AAtext, setAAtext] = useState({});
-
-  const changeName = (value: string) => {
-    dispatch(editCityName(value));
-  };
-
-  const DateNow = new Date();
-  console.log(DateNow.getHours());
-
-  const SchduleA = async (value: string) => {
-    try {
-      await dispatch(WeatherCurrentApi(value));
-      if (AppData !== null) {
-        setAAtext([{ ...AAtext }, { ...AppData }]);
-      }
-    } catch {
-      console.log('err');
-    }
-  };
-
-  const ClickHandler = async (e: string) => {
-    changeName(e);
-    await SchduleA(e);
-    setText('');
-  };
-
-  // const removehandler = (id: number) => {
-  //   return AppData.result.filter((e) => e.id !== id);
-  // };
-
-  return (
-    <WeatherMainPage>
-      <SearchBarArea>
-        <h1>어느 나라의 날씨가 궁금하신가요?</h1>
-        <InputBarArea>
-          <InputBar value={text} type="text" onChange={(e) => setText(e.target.value)}></InputBar>
-          <SubmitBtn type="submit" className="bg-blue-300" onClick={() => ClickHandler(text)}>
-            Click
-          </SubmitBtn>
-        </InputBarArea>
-      </SearchBarArea>
-      <ResultWeatherList>
-        {AppData &&
-          AppData.result.map((el: any, index: number) => (
-            <WeatherCard
-              key={index}
-              index={index}
-              id={el.id}
-              td={el.dt}
-              temp={el.main.temp}
-              weather={el.weather[0].main}
-              name={el.name}
-              // removehandler={removehandler}
-            ></WeatherCard>
-          ))}
-      </ResultWeatherList>
-    </WeatherMainPage>
-  );
-};
-
-export default Weather;

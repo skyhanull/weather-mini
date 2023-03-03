@@ -10,6 +10,23 @@ interface PageProps {
   handlePageChange: (page: number) => void;
 }
 
+const PagePagination = ({ totalCount, page, postPerPage, pageRangeDisplayed, handlePageChange }: PageProps) => {
+  return (
+    <PageContent>
+      <Pagination
+        activePage={page}
+        itemsCountPerPage={postPerPage}
+        totalItemsCount={totalCount ? totalCount : 0}
+        pageRangeDisplayed={pageRangeDisplayed}
+        prevPageText={'<'}
+        nextPageText={'>'}
+        onChange={handlePageChange}
+      />
+    </PageContent>
+  );
+};
+export default PagePagination;
+
 const PageContent = styled.div`
   .pagination {
     display: flex;
@@ -36,20 +53,3 @@ const PageContent = styled.div`
     text-decoration: none;
   }
 `;
-
-const PagePagination = ({ totalCount, page, postPerPage, pageRangeDisplayed, handlePageChange }: PageProps) => {
-  return (
-    <PageContent>
-      <Pagination
-        activePage={page}
-        itemsCountPerPage={postPerPage}
-        totalItemsCount={totalCount ? totalCount : 0}
-        pageRangeDisplayed={pageRangeDisplayed}
-        prevPageText={'<'}
-        nextPageText={'>'}
-        onChange={handlePageChange}
-      />
-    </PageContent>
-  );
-};
-export default PagePagination;
