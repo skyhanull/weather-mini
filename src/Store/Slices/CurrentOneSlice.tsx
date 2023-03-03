@@ -1,4 +1,4 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { WeatherCurrentApi } from '../thunk/CurrentThunk';
 import { RootState } from './Store';
 
@@ -75,9 +75,6 @@ const result: WeatherData = {
   timezone: 0,
   visibility: 0,
   weather: [
-    //  icon: "",
-    //   id: 0,
-    //   main: ""
     {
       description: '',
       icon: '',
@@ -95,33 +92,16 @@ export const ListSlice = createSlice({
   initialState: { result, loading: false, error: false },
   reducers: {},
   extraReducers: (builder) => {
-    // builder.addCase(WeatherCurrentApi.pending, (state, action) => {
-    //   state.loading = true;
-    //   state.error = false;
-    // }),
-    //   builder.addCase(WeatherCurrentApi.fulfilled, (state, action) => {
-    //     state.data = action.payload;
-    //     console.log(state.data);
-    //     state.loading = false;
-    //     state.error = false;
-    //   }),
-    //   builder.addCase(WeatherCurrentApi.rejected, (state, action) => {
-    //     state.error = true;
-    //     state.loading = false;
-    //   });
     builder
       .addCase(WeatherCurrentApi.pending, (state) => {
         state.loading = true;
         state.error = false;
       })
       .addCase(WeatherCurrentApi.fulfilled, (state, action) => {
-        console.log(action.payload);
         if (action.payload !== undefined) {
           const CurrentAPidata = action.payload;
           state.result = CurrentAPidata;
-          console.log(state.result);
         }
-
         state.loading = false;
         state.error = false;
       })
@@ -132,6 +112,5 @@ export const ListSlice = createSlice({
   },
 });
 
-// export const { removeList } = ListSlice.actions;
 export const getCurrentWeather = (state: RootState) => state.WeatherCurrentDay;
 export default ListSlice.reducer;
