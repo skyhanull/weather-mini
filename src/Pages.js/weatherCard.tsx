@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { WeatherFiveApi } from '../Store/thunk/fiveApiThunk';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { RootState } from '../Store/Slices/Store';
+import { AppDispatch, RootState } from '../Store/Slices/Store';
 import WeatherIcon from '../Component/weatherIcon';
 import WeatherDataList from '../Component/weatherDataList';
+import { WeatherFiveDay } from '../Store/Slices/fiveDaySlice';
+import WeatherSub from './WeatherSub';
 
 interface Icountry {
   id: number;
@@ -59,15 +62,14 @@ const WeatherCard = ({ id, td, temp, weather, name, index }: Icountry) => {
   const removal = useSelector((state: RootState) => state.ListSlice);
   console.log(removal);
   const [arraylist, setArrayList] = useState(AppData.result);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
-  // const removehandler = (id: number) => {
-  //   const BB = AppData.result.filter((e) => e.id !== id);
-  //   console.log([...BB]);
-  //   setArrayList([...BB]);
-  // };
-
-  const CombinData = { arraylist, id };
+  // const AAAA =async(name:string)=>{
+  //   dispatch(WeatherFiveApi(name));
+  // }
+  // const CombinData = { arraylist, id };
+  console.log(name);
   return (
     <CardContenttwo>
       <WeatherDataContent>
@@ -75,8 +77,9 @@ const WeatherCard = ({ id, td, temp, weather, name, index }: Icountry) => {
 
         <WeatherCardInfo>{WeatherDataList({ name, weather, temp })}</WeatherCardInfo>
       </WeatherDataContent>
-      <button>
-        <Link to="/detail">자세히보기</Link>
+      {/* <WeatherSub name={name} /> */}
+      <button onClick={() => dispatch(WeatherFiveApi(name))}>
+        <Link to={`/detail/${name}`}>자세히보기</Link>
       </button>
     </CardContenttwo>
   );
