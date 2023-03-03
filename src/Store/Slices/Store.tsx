@@ -1,22 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
 import WeatherFiveDay from './fiveDaySlice';
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import WeatherCurrentDay from './CurrentApi';
-import useCityNameSlice from './CityName';
-import ListSlice from './ListSlice';
+import WeatherCurrentDay from './CurrentApiSlice';
+import useCityNameSlice from './CityNameSlice';
+import CurrentOneSlice from './CurrentOneSlice';
 export const store = configureStore({
   reducer: {
     WeatherFiveDay,
     WeatherCurrentDay,
     useCityNameSlice,
-    ListSlice,
+    CurrentOneSlice,
   },
   devTools: process.env.NODE_ENV !== 'production',
 });
 
 export type RootState = ReturnType<typeof store.getState>;
-export const useAppDispatch = () => useDispatch<AppDispatch>();
 export type AppDispatch = typeof store.dispatch;
-export const useAppSelect: TypedUseSelectorHook<RootState> = useSelector;
 
 export default store;
