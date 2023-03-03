@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { WeatherFiveApi } from '../thunk/GoalSaga';
+import { WeatherFiveApi } from '../thunk/fiveApiThunk';
 import { RootState } from './Store';
 
 export interface CounterStateA {
@@ -63,22 +63,19 @@ export const WeatherFiveDay = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(WeatherFiveApi.pending, (state, action) => {
-      console.log('d');
-      state.loading = true;
-      state.error = false;
-    }),
-      builder.addCase(WeatherFiveApi.fulfilled, (state, action) => {
+    builder
+      .addCase(WeatherFiveApi.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(WeatherFiveApi.fulfilled, (state, action) => {
         state.data = action.payload;
-        console.log('e');
-        console.log(state.data);
         state.loading = false;
         state.error = false;
-      }),
-      builder.addCase(WeatherFiveApi.rejected, (state, action) => {
-        console.log('f');
-        state.error = true;
+      })
+      .addCase(WeatherFiveApi.rejected, (state) => {
         state.loading = false;
+        state.error = true;
       });
   },
 });
