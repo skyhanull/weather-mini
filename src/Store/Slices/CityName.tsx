@@ -1,19 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 export interface CityInfo {
   cityName: string;
 }
 const initialState: CityInfo = {
-  cityName: "",
+  cityName: '',
 };
 
 export const CityNameSlice = createSlice({
-  name: "CityName",
+  name: 'CityName',
   initialState,
   reducers: {
     editCityName: (state, action) => {
       state.cityName = action.payload;
-      console.log(state.cityName);
     },
   },
 });
