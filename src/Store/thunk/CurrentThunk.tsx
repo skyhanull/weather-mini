@@ -9,6 +9,6 @@ export const WeatherCurrentApi = createAsyncThunk('WeatherCurrentApi', async (va
 
     return await res.data;
   } catch (err) {
-    console.log(err);
+    throw new Error();
   }
 });
