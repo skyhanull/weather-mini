@@ -6,6 +6,7 @@
 ## 프로젝트 실행 방법
 
 ```
+https://github.com/skyhanull/weather-mini.git
 npm install
 npm start
 ```
