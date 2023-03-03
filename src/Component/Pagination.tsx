@@ -37,7 +37,7 @@ const PageContent = styled.div`
   }
 `;
 
-const MyPagePagination = ({ totalCount, page, postPerPage, pageRangeDisplayed, handlePageChange }: PageProps) => {
+const PagePagination = ({ totalCount, page, postPerPage, pageRangeDisplayed, handlePageChange }: PageProps) => {
   return (
     <PageContent>
       <Pagination
@@ -52,4 +52,4 @@ const MyPagePagination = ({ totalCount, page, postPerPage, pageRangeDisplayed, h
     </PageContent>
   );
 };
-export default MyPagePagination;
+export default PagePagination;
