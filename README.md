@@ -12,7 +12,7 @@ npm start
 ```
 
 # 사용한 라이브러리
-> typescrips, axios , redux-toolkit , pagination, styled-components,
+> typescript, axios , redux-toolkit , pagination, styled-components,
 
 # 배포링크
 [배포링크](http://weatherweb-yoon.s3-website.ap-northeast-2.amazonaws.com)
