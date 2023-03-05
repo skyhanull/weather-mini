@@ -47,3 +47,35 @@ npm start
 2. 위의 동적라우팅을 next로 처리를 해보고 싶다
 3. openweatherAPI말고 공공기관으로 바꿔서 해볼 수도..?
 
+
+```
+파일구조
+📦src
+ ┣ 📂Component
+ ┃ ┣ 📜Pagination.tsx
+ ┃ ┣ 📜weatherDataList.tsx
+ ┃ ┗ 📜weatherIcon.tsx
+ ┣ 📂Pages.js
+ ┃ ┣ 📜Weather.tsx
+ ┃ ┣ 📜WeatherSub.tsx
+ ┃ ┗ 📜weatherCard.tsx
+ ┣ 📂Store
+ ┃ ┣ 📂Slices
+ ┃ ┃ ┣ 📜CityNameSlice.tsx
+ ┃ ┃ ┣ 📜CurrentApiSlice.tsx
+ ┃ ┃ ┣ 📜CurrentOneSlice.tsx
+ ┃ ┃ ┣ 📜Store.tsx
+ ┃ ┃ ┗ 📜fiveDaySlice.tsx
+ ┃ ┗ 📂thunk
+ ┃ ┃ ┣ 📜CurrentThunk.tsx
+ ┃ ┃ ┗ 📜fiveApiThunk.tsx
+ ┣ 📂img
+ ┃ ┣ 📜dayImage.jpg
+ ┃ ┣ 📜mainImage.jpg
+ ┃ ┗ 📜nightImage.jpg
+ ┣ 📜.DS_Store
+ ┣ 📜App.tsx
+ ┣ 📜custom.d.ts
+ ┣ 📜index.css
+ ┗ 📜index.tsx
+```
