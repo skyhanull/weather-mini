@@ -63,7 +63,6 @@ npm start
  ┃ ┣ 📂Slices
  ┃ ┃ ┣ 📜CityNameSlice.tsx
  ┃ ┃ ┣ 📜CurrentApiSlice.tsx
- ┃ ┃ ┣ 📜CurrentOneSlice.tsx
  ┃ ┃ ┣ 📜Store.tsx
  ┃ ┃ ┗ 📜fiveDaySlice.tsx
  ┃ ┗ 📂thunk
